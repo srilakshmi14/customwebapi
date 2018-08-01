@@ -38,7 +38,6 @@ class NodeDetails extends ResourceBase {
    */
  
    use EntityResourceValidationTrait;
-  use EntityResourceAccessTrait;
  
   protected $currentUser;
   /**
