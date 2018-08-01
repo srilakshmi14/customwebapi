@@ -1,0 +1,6 @@
+name: Custom REST API Endpoints
+description: Implements custom REST API endpoints
+package: Custom
+type: module
+core: 8.x
+version: 1.0.0
