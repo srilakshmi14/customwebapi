@@ -55,7 +55,7 @@ trait EntityResourceValidationTrait {
 
    }
 
-  else{
+  else {
    return true;
   } 
 
