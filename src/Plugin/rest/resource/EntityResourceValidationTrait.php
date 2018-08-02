@@ -64,10 +64,10 @@ trait EntityResourceValidationTrait {
   public function errors($data){
 
      $entity_type_id = 'node';
-  $bundle = $data->type->target_id;
+  $bundle = $data['type'];
   $msg = 'Unable to process the request.';
 
-  if(empty($data->title->value)){
+  if(empty($data['title'])){
    $message = array('message' => $msg." title is a required field", 'code'=>'e2', 'response_status'=>'failure');
    return $message;
   
@@ -76,14 +76,14 @@ trait EntityResourceValidationTrait {
   foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
     if (!empty($field_definition->getTargetBundle())) {
       $bundleFields[$entity_type_id][$field_name]['type'] = $field_definition->getType();
-   
-   if($bundleFields[$entity_type_id][$field_name]['type'] != gettype($data->$field_name->value)){
-      $message = array('message'=> $msg.$field_name. " should be of type ".$bundleFields[$entity_type_id][$field_name]['type'].". ".gettype($data->$field_name->value)." given.", 'code'=>'e3','response_status'=>'failure');
+  if(!empty($data[$field_name])){ 
+   if($bundleFields[$entity_type_id][$field_name]['type'] != gettype($data[$field_name])){
+      $message = array('message'=> $msg.$field_name. " should be of type ".$bundleFields[$entity_type_id][$field_name]['type'].". ".gettype($data[$field_name])." given.", 'code'=>'e3','response_status'=>'failure');
      
       return $message;
     }
     
-
+  }
     }
   }
 
